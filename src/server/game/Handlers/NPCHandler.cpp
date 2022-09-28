@@ -349,7 +349,7 @@ void WorldSession::HandleGossipSelectOption(WorldPackets::NPC::GossipSelectOptio
         item = player->GetItemByGuid(packet.GossipUnit);
         if (!item || player->IsBankPos(item->GetPos()))
         {
-            TC_LOG_DEBUG("network", "WORLD: HandleGossipSelectOption - %s not found.", packet.GossipUnit.ToString());
+            TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOption - %s not found.", packet.GossipUnit.ToString());
             return;
         }
     }
@@ -357,7 +357,7 @@ void WorldSession::HandleGossipSelectOption(WorldPackets::NPC::GossipSelectOptio
     {
         if (packet.GossipUnit != player->GetGUID() || static_cast<uint32>(packet.GossipID) != player->PlayerTalkClass->GetGossipMenu().GetMenuId())
         {
-            TC_LOG_DEBUG("network", "WORLD: HandleGossipSelectOption - %s not found.", packet.GossipUnit.ToString());
+            TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: HandleGossipSelectOption - %s not found.", packet.GossipUnit.ToString());
             return;
         }
     }
