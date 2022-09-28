@@ -290,6 +290,15 @@ class ItemScript : public ScriptObject
         virtual bool OnExpire(Player* /*player*/, ItemTemplate const* /*proto*/) { return false; }
 
         virtual bool OnCreate(Player* /*player*/, Item* /*item*/) { return false; }
+
+        // Called when the item is destroyed.
+        virtual bool OnRemove(Player* /*player*/, Item* /*item*/) { return false; }
+
+        // Called when a player selects an option in an item gossip window
+        virtual void OnGossipSelect(Player* /*player*/, Item* /*item*/, uint32 /*sender*/, uint32 /*action*/) { }
+
+        // Called when a player selects an option in an item gossip window
+        virtual void OnGossipSelectCode(Player* /*player*/, Item* /*item*/, uint32 /*sender*/, uint32 /*action*/, const char* /*code*/) { }
 };
 
 class CreatureScript : public ScriptObject, public UpdatableScript<Creature>
@@ -733,6 +742,13 @@ class PlayerScript : public ScriptObject
         // Called when a player changes to a new map (after moving to new map)
         virtual void OnMapChanged(Player* /*player*/) { }
 
+        // Called when a player selects an option in a player gossip window
+        virtual void OnGossipSelect(Player* /*player*/, uint32 /*menu_id*/, uint32 /*sender*/, uint32 /*action*/) { }
+
+        // Called when a player selects an option in a player gossip window
+        virtual void OnGossipSelectCode(Player* /*player*/, uint32 /*menu_id*/, uint32 /*sender*/, uint32 /*action*/, const char* /*code*/) { }
+
+
         virtual void OnMovementInform(Player* /*player*/, uint32 /*moveType*/, uint32 /*ID*/) { }
 
         virtual void OnUpdate(Player* /*player*/, uint32 /*diff*/) { }
@@ -934,6 +950,9 @@ class ScriptMgr
         bool OnItemUse(Player* player, Item* item, SpellCastTargets const& targets);
         bool OnItemExpire(Player* player, ItemTemplate const* proto);
         bool OnItemCreate(Player* player, ItemTemplate const* proto, Item* item);
+        bool OnItemRemove(Player* player, Item* item);
+        void OnGossipSelect(Player* player, Item* item, uint32 sender, uint32 action);
+        void OnGossipSelectCode(Player* player, Item* item, uint32 sender, uint32 action, const char* code);
 
         /* CreatureScript */
         bool OnDummyEffect(Unit* caster, uint32 spellId, SpellEffIndex effIndex, Creature* target);
@@ -1043,6 +1062,8 @@ class ScriptMgr
         void OnPlayerDelete(ObjectGuid const& guid);
         void OnPlayerBindToInstance(Player* player, Difficulty difficulty, uint32 mapid, bool permanent);
         void OnPlayerUpdateZone(Player* player, uint32 newZone, uint32 newArea);
+        void OnGossipSelect(Player* player, uint32 menu_id, uint32 sender, uint32 action);
+        void OnGossipSelectCode(Player* player, uint32 menu_id, uint32 sender, uint32 action, const char* code);
         void OnPetBattleFinish(Player* player);
         void OnMovementInform(Player* player, uint32 moveType, uint32 ID);
         void OnUpdate(Player* player, uint32 diff);

@@ -79,6 +79,7 @@ enum eTradeskill
 // d - Action (identifys this Menu Item)
 // e - Text to be displayed in pop up box
 // f - Money value in pop up box
+#define CLEAR_GOSSIP_MENU()         PlayerTalkClass->ClearMenus();
 #define ADD_GOSSIP_ITEM(a, b, c, d)   PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, a, b, c, d, "", 0)
 #define ADD_GOSSIP_ITEM_DB(h, i, c, d)   PlayerTalkClass->GetGossipMenu().AddMenuItem(h, i, c, d)
 #define ADD_GOSSIP_ITEM_EXTENDED(a, b, c, d, e, f, g)   PlayerTalkClass->GetGossipMenu().AddMenuItem(-1, a, b, c, d, e, f, 0, g)
